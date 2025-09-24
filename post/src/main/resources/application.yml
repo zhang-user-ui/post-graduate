@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: 'jdbc:mysql://public-mysql:3306/webapp_db?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true'
+    username: zx
+    password: 213342zx
+  sql:
+    init:
+      mode: always
+
+logging:
+  level:
+    sql: debug
+    com:
+      example: debug
+  pattern:
+    console: '%-5level %C.%M[%line] - %msg%n'
