@@ -14,8 +14,8 @@ create table if not exists category
     category_id char(19) primary key comment '类别id',
     college_id varchar(70) not null comment '所属学院id',
     category_name varchar(50) unique not null comment '类别名称',
-    weighted_score_ratio decimal(3, 2) not null comment '加权平均成绩占比',
-    other_score_ratio    decimal(3, 2) not null comment '细则成绩占比',
+    weighted_score_ratio JSON not null comment '加权平均成绩占比',
+    other_score_ratio JSON not null comment '细则成绩占比',
     create_time datetime not null default current_timestamp comment '创建时间',
     update_time datetime not null default current_timestamp comment '更新时间',
     index(category_name)
@@ -48,6 +48,17 @@ create table if not exists user
     index(user_id,user_name)
 
 );
+-- 用户与类别关系表
+create table if not exists user_category_relation
+(
+    relation_id char(19) primary key comment '关系记录ID',
+    user_id char(19) not null comment '用户ID（关联user表）',
+    category_id char(19) not null comment '类别ID（关联category表）',
+    permission_type varchar(20) not null default 'read' comment '权限类型（read:只读, manage:管理）',
+    create_time datetime not null default current_timestamp comment '创建时间',
+    update_time datetime not null default current_timestamp comment '更新时间',
+    index (user_id, permission_type)
+);
 -- 指标点表
 create table if not exists rule_node
 (
@@ -68,7 +79,7 @@ create table if not exists rule_node_level
 (
     level_id char(19) primary key comment '等级id',
     category_id char(19) not null comment '所属类别id',
-    rule_node_id char(19) primary key comment '关联指标节点id',
+    rule_node_id char(19) not null comment '关联指标节点id',
     level_name varchar(70) not null comment '等级名称（eg.第一等级一等奖）',
     level_score decimal(5,2) not null comment '等级加分（第一等级一等奖50分）',
     level_desc text comment '描述',
@@ -86,15 +97,15 @@ create table if not exists student_record
     weighted_score decimal(5,2) comment '加权平均成绩',
     ranking int not null comment '专业排名',
     total_score decimal(5,2) comment '总成绩',
-    rule_node_id char(19) primary key comment '指标节点id',
-    level_id char(19) primary key comment '等级id',
+    rule_node_id char(19) not null comment '指标节点id',
+    level_id char(19) not null comment '等级id',
     teacher_score decimal(5,2) comment '导员打分',
     status tinyint default 0 comment '审核状态（0=待提交，1=待导员审核，2=导员审核通过，3=导员审核不通过',
     remark text comment '审核备注（导员填写）',
     teacher_id char(19) not null comment '审核导员工号（关联user表，role=导员）',
     create_time datetime not null default current_timestamp comment '创建时间',
     update_time datetime not null default current_timestamp comment '更新时间',
-    index(student_id)
+    index(student_id,status)
 );
 -- 申报材料表
 create table application_material
@@ -114,15 +125,15 @@ create table application_material
 -- 审核日志表
 create table if not exists review_log
 (
-    log_id char(19) primary key comment '日志id',
-    teacher_id char(19) not null comment '审核导员工号（关联user表，role=导员）',
-    student_id char(19) not null comment '被审核学生学号（关联user表，role=学生）',
-    record_id char(19) not null comment '加分记录id',
-    material_id char(19) primary key comment '审核材料材料id',
-    review_result varchar(70) not null comment '审核结果',
-    review_time time not null comment '审核时间',
+    log_id         char(19) primary key comment '日志id',
+    teacher_id     char(19)    not null comment '审核导员工号（关联user表，role=导员）',
+    student_id     char(19)    not null comment '被审核学生学号（关联user表，role=学生）',
+    record_id      char(19)    not null comment '加分记录id',
+    material_id    char(19)    not null comment '审核材料材料id',
+    review_result  varchar(70) not null comment '审核结果',
+    review_time    time        not null comment '审核时间',
     review_comment text comment '审核备注',
-    create_time datetime not null default current_timestamp comment '创建时间',
-    update_time datetime not null default current_timestamp comment '更新时间',
-    index(teacher_id,review_time)
+    create_time    datetime    not null default current_timestamp comment '创建时间',
+    update_time    datetime    not null default current_timestamp comment '更新时间',
+    index (teacher_id, review_time)
 );

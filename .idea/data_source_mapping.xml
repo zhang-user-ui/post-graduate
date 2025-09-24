@@ -2,5 +2,11 @@
 <project version="4">
   <component name="DataSourcePerFileMappings">
     <file url="file://$PROJECT_DIR$/post/src/main/resources/schema.sql" value="29124ef0-abbf-4aaf-9cd8-0be2cb2ddded" />
+    <file url="file://$PROJECT_DIR$/post/src/test/sql/admin.sql" value="29124ef0-abbf-4aaf-9cd8-0be2cb2ddded" />
+    <file url="file://$PROJECT_DIR$/post/src/test/sql/logs.sql" value="29124ef0-abbf-4aaf-9cd8-0be2cb2ddded" />
+    <file url="file://$PROJECT_DIR$/post/src/test/sql/material.sql" value="29124ef0-abbf-4aaf-9cd8-0be2cb2ddded" />
+    <file url="file://$PROJECT_DIR$/post/src/test/sql/node.sql" value="29124ef0-abbf-4aaf-9cd8-0be2cb2ddded" />
+    <file url="file://$PROJECT_DIR$/post/src/test/sql/student.sql" value="29124ef0-abbf-4aaf-9cd8-0be2cb2ddded" />
+    <file url="file://$PROJECT_DIR$/post/src/test/sql/teaher.sql" value="29124ef0-abbf-4aaf-9cd8-0be2cb2ddded" />
   </component>
 </project>
