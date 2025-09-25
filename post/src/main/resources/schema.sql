@@ -1,4 +1,4 @@
--- 学院信息表
+#学院信息表
 create table if not exists college
 (
     college_id char(19) primary key comment '学院ID',
@@ -8,7 +8,7 @@ create table if not exists college
     index(college_name)
 
 );
--- 类别表
+#类别表
 create table if not exists category
 (
     category_id char(19) primary key comment '类别id',
@@ -21,7 +21,7 @@ create table if not exists category
     index(category_name)
 
 );
--- 专业表
+#专业表
 create table if not exists major
 (
     major_id char(19) primary key comment '专业id',
@@ -31,7 +31,7 @@ create table if not exists major
     update_time datetime not null default current_timestamp comment '更新时间',
     index(major_name)
 );
--- 用户表
+#用户表
 create table if not exists user
 (
     user_id char(19) primary key comment '学号/工号',
@@ -48,7 +48,7 @@ create table if not exists user
     index(user_id,user_name)
 
 );
--- 用户与类别关系表
+#用户与类别关系表
 create table if not exists user_category_relation
 (
     relation_id char(19) primary key comment '关系记录ID',
@@ -59,7 +59,7 @@ create table if not exists user_category_relation
     update_time datetime not null default current_timestamp comment '更新时间',
     index (user_id, permission_type)
 );
--- 指标点表
+#指标点表
 create table if not exists rule_node
 (
     rule_node_id char(19) primary key comment '指标节点id',
@@ -74,7 +74,7 @@ create table if not exists rule_node
     update_time datetime not null default current_timestamp comment '更新时间',
     index(category_id,rule_node_name)
 );
--- 指标等级表
+#指标等级表
 create table if not exists rule_node_level
 (
     level_id char(19) primary key comment '等级id',
@@ -87,7 +87,7 @@ create table if not exists rule_node_level
     update_time datetime not null default current_timestamp comment '更新时间',
     index(category_id,level_name)
 );
--- 学生加分记录表
+#学生加分记录表
 create table if not exists student_record
 (
     record_id char(19) primary key comment '加分记录id',
@@ -107,7 +107,7 @@ create table if not exists student_record
     update_time datetime not null default current_timestamp comment '更新时间',
     index(student_id,status)
 );
--- 申报材料表
+#申报材料表
 create table application_material
 (
     material_id char(19) primary key comment '材料id',
@@ -122,7 +122,7 @@ create table application_material
     index(material_name,record_id)
 
 );
--- 审核日志表
+#审核日志表
 create table if not exists review_log
 (
     log_id         char(19) primary key comment '日志id',
